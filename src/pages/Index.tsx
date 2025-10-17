@@ -339,9 +339,22 @@ const Index = () => {
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <Icon name="Phone" size={24} className="text-primary mt-1" />
-                    <div>
+                    <div className="flex-1">
                       <h4 className="font-semibold mb-2">Телефон</h4>
-                      <p className="text-muted-foreground">+7 (902) 310-46-88</p>
+                      <a 
+                        href="tel:+79023104688" 
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        +7 (902) 310-46-88
+                      </a>
+                      <Button 
+                        size="sm" 
+                        className="mt-3 w-full"
+                        onClick={() => window.location.href = 'tel:+79023104688'}
+                      >
+                        <Icon name="Phone" size={16} className="mr-2" />
+                        Позвонить
+                      </Button>
                     </div>
                   </div>
                 </CardContent>
