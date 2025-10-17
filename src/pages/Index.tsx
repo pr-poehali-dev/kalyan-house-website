@@ -12,6 +12,7 @@ interface Product {
   price: number;
   category: string;
   image: string;
+  description?: string;
 }
 
 interface CartItem extends Product {
@@ -20,32 +21,42 @@ interface CartItem extends Product {
 
 const Index = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [activeSection, setActiveSection] = useState('home');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const categories = [
-    { name: 'Кальяны', icon: 'Flame', color: '#9b87f5' },
-    { name: 'Табак', icon: 'Package', color: '#7E69AB' },
-    { name: 'Одноразки', icon: 'Zap', color: '#D946EF' },
-    { name: 'Уголь', icon: 'Flame', color: '#F97316' },
-    { name: 'Жидкости', icon: 'Droplets', color: '#0EA5E9' },
+    { name: 'Все товары', key: 'all', icon: 'Store', color: '#9b87f5' },
+    { name: 'Кальяны', key: 'hookah', icon: 'Flame', color: '#9b87f5' },
+    { name: 'Табак', key: 'tobacco', icon: 'Package', color: '#7E69AB' },
+    { name: 'Одноразки', key: 'disposable', icon: 'Zap', color: '#D946EF' },
+    { name: 'Уголь', key: 'coal', icon: 'Circle', color: '#F97316' },
+    { name: 'Жидкости', key: 'liquid', icon: 'Droplets', color: '#0EA5E9' },
   ];
 
   const products: Product[] = [
-    { id: 1, name: 'Кальян Premium Gold', price: 15900, category: 'Кальяны', image: 'https://images.unsplash.com/photo-1591238371728-70fbfe6c9bf8?w=400' },
-    { id: 2, name: 'Darkside 250г', price: 1290, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
-    { id: 3, name: 'Brusko 50г', price: 650, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
-    { id: 4, name: 'Daily Hookah 250г', price: 1100, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
-    { id: 5, name: 'Must Have 125г', price: 890, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
-    { id: 6, name: 'Sebero 100г', price: 750, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
-    { id: 7, name: 'Element 100г', price: 790, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
-    { id: 8, name: 'Bonche 80г', price: 680, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
-    { id: 9, name: 'Duft 100г', price: 820, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
-    { id: 10, name: 'Одноразка ELF BAR', price: 550, category: 'Одноразки', image: 'https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=400' },
-    { id: 11, name: 'Уголь кокосовый 1кг', price: 450, category: 'Уголь', image: 'https://images.unsplash.com/photo-1610448721566-47369c768e70?w=400' },
-    { id: 12, name: 'Жидкость Salt 30мл', price: 390, category: 'Жидкости', image: 'https://images.unsplash.com/photo-1608671685857-c8f451c42065?w=400' },
-    { id: 13, name: 'Кальян Portable Mini', price: 4900, category: 'Кальяны', image: 'https://images.unsplash.com/photo-1591238371728-70fbfe6c9bf8?w=400' },
-    { id: 14, name: 'Одноразка HQD', price: 450, category: 'Одноразки', image: 'https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=400' },
+    { id: 1, name: 'Кальян Premium Gold', price: 15900, category: 'hookah', image: 'https://images.unsplash.com/photo-1591238371728-70fbfe6c9bf8?w=600', description: 'Премиум кальян с золотым покрытием' },
+    { id: 2, name: 'Кальян Portable Mini', price: 4900, category: 'hookah', image: 'https://images.unsplash.com/photo-1591238371728-70fbfe6c9bf8?w=600', description: 'Компактный портативный кальян' },
+    { id: 3, name: 'Кальян Classic Steel', price: 8500, category: 'hookah', image: 'https://images.unsplash.com/photo-1591238371728-70fbfe6c9bf8?w=600', description: 'Классический стальной кальян' },
+    
+    { id: 4, name: 'Darkside 250г', price: 1290, category: 'tobacco', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=600', description: 'Крепкий табак премиум класса' },
+    { id: 5, name: 'Brusko 50г', price: 650, category: 'tobacco', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=600', description: 'Популярный бренд табака' },
+    { id: 6, name: 'Daily Hookah 250г', price: 1100, category: 'tobacco', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=600', description: 'Табак для ежедневного курения' },
+    { id: 7, name: 'Must Have 125г', price: 890, category: 'tobacco', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=600', description: 'Сбалансированный вкус' },
+    { id: 8, name: 'Sebero 100г', price: 750, category: 'tobacco', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=600', description: 'Яркие фруктовые миксы' },
+    
+    { id: 9, name: 'ELF BAR 5000', price: 650, category: 'disposable', image: 'https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=600', description: '5000 затяжек' },
+    { id: 10, name: 'HQD Ultra', price: 550, category: 'disposable', image: 'https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=600', description: 'Популярная одноразка' },
+    { id: 11, name: 'Puff Bar Plus', price: 450, category: 'disposable', image: 'https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=600', description: 'Компактная и удобная' },
+    
+    { id: 12, name: 'Уголь кокосовый 1кг', price: 450, category: 'coal', image: 'https://images.unsplash.com/photo-1610448721566-47369c768e70?w=600', description: 'Натуральный кокосовый уголь' },
+    { id: 13, name: 'Уголь Tom Coco 1кг', price: 550, category: 'coal', image: 'https://images.unsplash.com/photo-1610448721566-47369c768e70?w=600', description: 'Премиум уголь Tom Coco' },
+    
+    { id: 14, name: 'Жидкость Salt 30мл', price: 390, category: 'liquid', image: 'https://images.unsplash.com/photo-1608671685857-c8f451c42065?w=600', description: 'Солевой никотин 30мл' },
+    { id: 15, name: 'Жидкость Freebase 60мл', price: 490, category: 'liquid', image: 'https://images.unsplash.com/photo-1608671685857-c8f451c42065?w=600', description: 'Классический никотин 60мл' },
   ];
+
+  const filteredProducts = selectedCategory === 'all' 
+    ? products 
+    : products.filter(p => p.category === selectedCategory);
 
   const addToCart = (product: Product) => {
     setCart(prev => {
@@ -77,70 +88,49 @@ const Index = () => {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-purple-50/30">
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900">
+      <header className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-purple-500/20">
         <nav className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Icon name="Flame" className="text-primary" size={32} />
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                Kalyan House
-              </span>
-            </div>
-
-            <div className="hidden md:flex items-center gap-8">
-              <button
-                onClick={() => setActiveSection('home')}
-                className="text-sm font-medium hover:text-primary transition-colors"
-              >
-                Главная
-              </button>
-              <button
-                onClick={() => setActiveSection('catalog')}
-                className="text-sm font-medium hover:text-primary transition-colors"
-              >
-                Каталог
-              </button>
-              <button
-                onClick={() => setActiveSection('about')}
-                className="text-sm font-medium hover:text-primary transition-colors"
-              >
-                О магазине
-              </button>
-              <button
-                onClick={() => setActiveSection('contacts')}
-                className="text-sm font-medium hover:text-primary transition-colors"
-              >
-                Контакты
-              </button>
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <Icon name="Flame" className="text-purple-500" size={36} />
+                <div className="absolute inset-0 blur-xl bg-purple-500/30" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 bg-clip-text text-transparent">
+                  Kalyan House
+                </h1>
+                <p className="text-xs text-purple-300/60">Кальянный магазин</p>
+              </div>
             </div>
 
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon" className="relative">
-                  <Icon name="ShoppingCart" size={20} />
+                <Button variant="outline" size="icon" className="relative border-purple-500/30 hover:bg-purple-500/10">
+                  <Icon name="ShoppingCart" size={20} className="text-purple-300" />
                   {totalItems > 0 && (
-                    <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs">
+                    <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs bg-gradient-to-r from-purple-500 to-pink-500">
                       {totalItems}
                     </Badge>
                   )}
                 </Button>
               </SheetTrigger>
-              <SheetContent className="w-full sm:max-w-lg">
+              <SheetContent className="w-full sm:max-w-lg bg-slate-950 border-purple-500/20">
                 <SheetHeader>
-                  <SheetTitle>Корзина</SheetTitle>
+                  <SheetTitle className="text-purple-300">Корзина</SheetTitle>
                 </SheetHeader>
-                <div className="mt-8 flex flex-col gap-4">
+                <div className="mt-8 flex flex-col h-full">
                   {cart.length === 0 ? (
-                    <div className="text-center py-12 text-muted-foreground">
-                      <Icon name="ShoppingCart" size={48} className="mx-auto mb-4 opacity-50" />
+                    <div className="text-center py-12 text-purple-300/50">
+                      <Icon name="ShoppingCart" size={48} className="mx-auto mb-4 opacity-30" />
                       <p>Корзина пуста</p>
                     </div>
                   ) : (
                     <>
-                      <div className="flex-1 overflow-auto space-y-4">
+                      <div className="flex-1 overflow-auto space-y-4 pb-4">
                         {cart.map(item => (
-                          <Card key={item.id}>
+                          <Card key={item.id} className="bg-slate-900/50 border-purple-500/20">
                             <CardContent className="p-4">
                               <div className="flex gap-4">
                                 <img
@@ -149,26 +139,26 @@ const Index = () => {
                                   className="w-20 h-20 object-cover rounded-lg"
                                 />
                                 <div className="flex-1">
-                                  <h4 className="font-semibold text-sm">{item.name}</h4>
-                                  <p className="text-sm text-muted-foreground mt-1">
+                                  <h4 className="font-semibold text-sm text-purple-200">{item.name}</h4>
+                                  <p className="text-sm text-purple-400 mt-1">
                                     {item.price.toLocaleString('ru-RU')} ₽
                                   </p>
                                   <div className="flex items-center gap-2 mt-2">
                                     <Button
                                       size="icon"
                                       variant="outline"
-                                      className="h-7 w-7"
+                                      className="h-7 w-7 border-purple-500/30"
                                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
                                     >
                                       <Icon name="Minus" size={14} />
                                     </Button>
-                                    <span className="text-sm font-medium w-8 text-center">
+                                    <span className="text-sm font-medium w-8 text-center text-purple-200">
                                       {item.quantity}
                                     </span>
                                     <Button
                                       size="icon"
                                       variant="outline"
-                                      className="h-7 w-7"
+                                      className="h-7 w-7 border-purple-500/30"
                                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
                                     >
                                       <Icon name="Plus" size={14} />
@@ -176,7 +166,7 @@ const Index = () => {
                                     <Button
                                       size="icon"
                                       variant="ghost"
-                                      className="h-7 w-7 ml-auto"
+                                      className="h-7 w-7 ml-auto text-red-400 hover:text-red-300"
                                       onClick={() => removeFromCart(item.id)}
                                     >
                                       <Icon name="Trash2" size={14} />
@@ -188,13 +178,13 @@ const Index = () => {
                           </Card>
                         ))}
                       </div>
-                      <Separator />
+                      <Separator className="my-4 bg-purple-500/20" />
                       <div className="space-y-4">
                         <div className="flex justify-between text-lg font-bold">
-                          <span>Итого:</span>
-                          <span>{totalPrice.toLocaleString('ru-RU')} ₽</span>
+                          <span className="text-purple-300">Итого:</span>
+                          <span className="text-purple-400">{totalPrice.toLocaleString('ru-RU')} ₽</span>
                         </div>
-                        <Button className="w-full" size="lg">
+                        <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500">
                           Оформить заказ
                         </Button>
                       </div>
@@ -207,284 +197,135 @@ const Index = () => {
         </nav>
       </header>
 
-      <main>
-        {activeSection === 'home' && (
-          <>
-            <section className="container mx-auto px-4 py-16 md:py-24">
-              <div className="max-w-4xl mx-auto text-center animate-fade-in">
-                <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-purple-600 bg-clip-text text-transparent">
-                  Kalyan House
-                </h1>
-                <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-                  Премиум кальяны и аксессуары для истинных ценителей
-                </p>
-                <Button
-                  size="lg"
-                  className="text-lg px-8"
-                  onClick={() => setActiveSection('catalog')}
-                >
-                  Перейти в каталог
-                  <Icon name="ArrowRight" size={20} className="ml-2" />
-                </Button>
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-300 via-pink-300 to-purple-400 bg-clip-text text-transparent">
+              Kalyan House
+            </h2>
+            <p className="text-xl text-purple-200/80 mb-8">
+              Премиум кальяны, табак и аксессуары. Качественные товары для настоящих ценителей.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <div className="flex items-center gap-2 text-purple-300">
+                <Icon name="Check" size={20} className="text-green-400" />
+                <span>Оригинальная продукция</span>
               </div>
-            </section>
-
-            <section className="container mx-auto px-4 py-16">
-              <h2 className="text-3xl font-bold text-center mb-12">Категории товаров</h2>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
-                {categories.map((category, index) => (
-                  <Card
-                    key={category.name}
-                    className="cursor-pointer group overflow-hidden transition-transform hover:scale-105 animate-fade-in"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                    onClick={() => setActiveSection('catalog')}
-                  >
-                    <CardContent className="p-6 text-center">
-                      <div
-                        className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center transition-transform group-hover:scale-110"
-                        style={{ backgroundColor: `${category.color}20` }}
-                      >
-                        <Icon name={category.icon as any} size={32} style={{ color: category.color }} />
-                      </div>
-                      <h3 className="font-semibold">{category.name}</h3>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className="flex items-center gap-2 text-purple-300">
+                <Icon name="Check" size={20} className="text-green-400" />
+                <span>Быстрая доставка</span>
               </div>
-            </section>
+              <div className="flex items-center gap-2 text-purple-300">
+                <Icon name="Check" size={20} className="text-green-400" />
+                <span>Лучшие цены</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <section className="container mx-auto px-4 py-16">
-              <Card className="bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10 border-primary/20">
-                <CardContent className="p-8 md:p-12">
-                  <div className="flex flex-col md:flex-row items-center gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center">
-                        <Icon name="Gift" size={40} className="text-primary" />
-                      </div>
-                    </div>
-                    <div className="flex-1 text-center md:text-left">
-                      <h3 className="text-2xl md:text-3xl font-bold mb-2">Бонусная программа</h3>
-                      <p className="text-lg text-muted-foreground">
-                        При покупке табака от 1000 рублей — <strong className="text-primary">табак Brusko в подарок!</strong>
-                      </p>
-                    </div>
-                    <Button 
-                      size="lg"
-                      onClick={() => setActiveSection('catalog')}
-                      className="flex-shrink-0"
+      <section className="py-12 bg-slate-900/50">
+        <div className="container mx-auto px-4">
+          <h3 className="text-2xl font-bold text-center mb-8 text-purple-300">Категории товаров</h3>
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {categories.map(cat => (
+              <Button
+                key={cat.key}
+                variant={selectedCategory === cat.key ? 'default' : 'outline'}
+                className={`flex items-center gap-2 ${
+                  selectedCategory === cat.key 
+                    ? 'bg-gradient-to-r from-purple-600 to-pink-600' 
+                    : 'border-purple-500/30 hover:bg-purple-500/10'
+                }`}
+                onClick={() => setSelectedCategory(cat.key)}
+              >
+                <Icon name={cat.icon as any} size={18} />
+                {cat.name}
+              </Button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredProducts.map(product => (
+              <Card key={product.id} className="overflow-hidden bg-slate-900/80 border-purple-500/20 hover:border-purple-500/40 transition-all hover:shadow-xl hover:shadow-purple-500/20">
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
+                </div>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold text-lg mb-2 text-purple-200">{product.name}</h3>
+                  {product.description && (
+                    <p className="text-sm text-purple-300/60 mb-3">{product.description}</p>
+                  )}
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold text-purple-400">
+                      {product.price.toLocaleString('ru-RU')} ₽
+                    </span>
+                    <Button
+                      size="sm"
+                      onClick={() => addToCart(product)}
+                      className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500"
                     >
-                      Выбрать табак
-                      <Icon name="ArrowRight" size={20} className="ml-2" />
+                      <Icon name="ShoppingCart" size={16} className="mr-2" />
+                      В корзину
                     </Button>
                   </div>
                 </CardContent>
               </Card>
-            </section>
-          </>
-        )}
+            ))}
+          </div>
+        </div>
+      </section>
 
-        {activeSection === 'catalog' && (
-          <section className="container mx-auto px-4 py-16">
-            <div className="mb-8 p-4 bg-primary/10 border border-primary/20 rounded-lg">
-              <div className="flex items-center gap-3">
-                <Icon name="Gift" size={24} className="text-primary flex-shrink-0" />
-                <p className="text-sm md:text-base">
-                  <strong>Акция!</strong> Покупка табака от 1000₽ — табак Brusko в подарок
-                </p>
+      <footer className="bg-slate-950 border-t border-purple-500/20 py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Icon name="Flame" className="text-purple-500" size={24} />
+                <span className="font-bold text-lg text-purple-300">Kalyan House</span>
               </div>
-            </div>
-            <h2 className="text-4xl font-bold mb-12">Каталог товаров</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {products.map((product, index) => (
-                <Card
-                  key={product.id}
-                  className="overflow-hidden transition-transform hover:scale-105 animate-fade-in"
-                  style={{ animationDelay: `${index * 0.05}s` }}
-                >
-                  <div className="aspect-square overflow-hidden">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover transition-transform hover:scale-110"
-                    />
-                  </div>
-                  <CardContent className="p-4">
-                    <Badge variant="secondary" className="mb-2">
-                      {product.category}
-                    </Badge>
-                    <h3 className="font-semibold mb-2">{product.name}</h3>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xl font-bold text-primary">
-                        {product.price.toLocaleString('ru-RU')} ₽
-                      </span>
-                      <Button size="sm" onClick={() => addToCart(product)}>
-                        <Icon name="Plus" size={16} />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {activeSection === 'about' && (
-          <section className="container mx-auto px-4 py-16 max-w-3xl animate-fade-in">
-            <h2 className="text-4xl font-bold mb-8">О магазине</h2>
-            <Card>
-              <CardContent className="p-8 space-y-6">
-                <p className="text-lg">
-                  <strong>Kalyan House</strong> — это премиальный магазин кальянной продукции, где каждый найдет всё необходимое для идеального отдыха.
-                </p>
-                <p className="text-muted-foreground">
-                  Мы специализируемся на продаже высококачественных кальянов, табака, одноразовых устройств, угля и жидкостей для электронных сигарет. Наша миссия — предоставить вам только лучшие товары от проверенных производителей.
-                </p>
-                <div className="grid md:grid-cols-3 gap-6 pt-6">
-                  <div className="text-center">
-                    <Icon name="Award" size={40} className="mx-auto mb-3 text-primary" />
-                    <h4 className="font-semibold mb-2">Качество</h4>
-                    <p className="text-sm text-muted-foreground">Только оригинальная продукция</p>
-                  </div>
-                  <div className="text-center">
-                    <Icon name="Truck" size={40} className="mx-auto mb-3 text-primary" />
-                    <h4 className="font-semibold mb-2">Доставка</h4>
-                    <p className="text-sm text-muted-foreground">Быстрая доставка по городу</p>
-                  </div>
-                  <div className="text-center">
-                    <Icon name="Headphones" size={40} className="mx-auto mb-3 text-primary" />
-                    <h4 className="font-semibold mb-2">Поддержка</h4>
-                    <p className="text-sm text-muted-foreground">Консультация экспертов</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </section>
-        )}
-
-        {activeSection === 'contacts' && (
-          <section className="container mx-auto px-4 py-16 max-w-3xl animate-fade-in">
-            <h2 className="text-4xl font-bold mb-8">Контакты</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <Icon name="MapPin" size={24} className="text-primary mt-1" />
-                    <div>
-                      <h4 className="font-semibold mb-2">Адрес</h4>
-                      <p className="text-muted-foreground">г. Волгоград, ул. Советская, д. 20</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <Icon name="Phone" size={24} className="text-primary mt-1" />
-                    <div className="flex-1">
-                      <h4 className="font-semibold mb-2">Телефон</h4>
-                      <a 
-                        href="tel:+79023104688" 
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        +7 (902) 310-46-88
-                      </a>
-                      <Button 
-                        size="sm" 
-                        className="mt-3 w-full"
-                        onClick={() => window.location.href = 'tel:+79023104688'}
-                      >
-                        <Icon name="Phone" size={16} className="mr-2" />
-                        Позвонить
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <Icon name="Mail" size={24} className="text-primary mt-1" />
-                    <div>
-                      <h4 className="font-semibold mb-2">Email</h4>
-                      <p className="text-muted-foreground">rinatsimashev@yandex.ru</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <Icon name="Clock" size={24} className="text-primary mt-1" />
-                    <div>
-                      <h4 className="font-semibold mb-2">Режим работы</h4>
-                      <p className="text-muted-foreground">Ежедневно: 11:00 - 23:00</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <p className="text-purple-300/60 text-sm">
+                Лучший выбор кальянов, табака и аксессуаров в вашем городе
+              </p>
             </div>
             
-            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="gap-2"
-                onClick={() => window.open('https://t.me/PoisonRose321', '_blank')}
-              >
-                <Icon name="Send" size={20} />
-                Написать в Telegram
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="gap-2"
-                onClick={() => window.open('https://vk.com/kalyanhouse_vlg', '_blank')}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14c5.6 0 6.93-1.33 6.93-6.93V8.93C22 3.33 20.67 2 15.07 2zm3.15 14.89c-.38.42-1.06.64-1.76.64-.88 0-1.6-.34-2.24-.85-.5-.4-.93-.86-1.37-1.37-.22.26-.44.5-.67.73-.73.73-1.46 1.21-2.37 1.21-.49 0-.93-.14-1.29-.42-.88-.68-.88-1.93 0-3.48.42-.75.98-1.48 1.6-2.1.85-.85 1.76-1.45 2.67-1.45.49 0 .93.14 1.29.42.42.33.64.79.64 1.34 0 .73-.34 1.48-.88 2.24l-.22.3c.26.3.52.58.79.84.56.54 1.14.93 1.83.93.38 0 .67-.11.88-.34.42-.45.42-1.21 0-2.24-.22-.54-.54-1.09-.93-1.64-.85-1.21-1.98-2.37-3.15-3.15-.64-.42-1.34-.64-2.08-.64-1.21 0-2.37.54-3.37 1.54-1.76 1.76-2.89 4.13-2.89 6.14 0 1.06.3 1.98.88 2.67.64.76 1.54 1.14 2.67 1.14 1.45 0 2.89-.64 4.13-1.76.42-.38.82-.79 1.21-1.21.42.54.88 1.06 1.37 1.54.93.93 1.98 1.45 3.15 1.45 1.06 0 2.08-.34 2.89-1.14.42-.42.64-.93.64-1.54 0-.88-.42-1.76-1.21-2.37z"/>
-                </svg>
-                ВКонтакте
-              </Button>
+            <div>
+              <h4 className="font-semibold mb-4 text-purple-300">Контакты</h4>
+              <div className="space-y-2 text-sm text-purple-300/60">
+                <div className="flex items-center gap-2">
+                  <Icon name="Phone" size={16} />
+                  <span>+7 (999) 123-45-67</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Icon name="Mail" size={16} />
+                  <span>info@kalyanhouse.ru</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Icon name="MapPin" size={16} />
+                  <span>г. Москва, ул. Примерная, 1</span>
+                </div>
+              </div>
             </div>
-          </section>
-        )}
-      </main>
-
-      <footer className="bg-muted mt-24 py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-2">
-              <Icon name="Flame" className="text-primary" size={28} />
-              <span className="text-xl font-bold">Kalyan House</span>
+            
+            <div>
+              <h4 className="font-semibold mb-4 text-purple-300">Режим работы</h4>
+              <div className="space-y-1 text-sm text-purple-300/60">
+                <p>Пн-Пт: 10:00 - 22:00</p>
+                <p>Сб-Вс: 12:00 - 23:00</p>
+              </div>
             </div>
-            <p className="text-sm text-muted-foreground">© 2024 Kalyan House. Все права защищены.</p>
-            <div className="flex gap-4">
-              <Button 
-                variant="ghost" 
-                size="icon"
-                onClick={() => window.open('https://t.me/PoisonRose321', '_blank')}
-              >
-                <Icon name="Send" size={20} />
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="icon"
-                onClick={() => window.open('https://vk.com/kalyanhouse_vlg', '_blank')}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14c5.6 0 6.93-1.33 6.93-6.93V8.93C22 3.33 20.67 2 15.07 2zm3.15 14.89c-.38.42-1.06.64-1.76.64-.88 0-1.6-.34-2.24-.85-.5-.4-.93-.86-1.37-1.37-.22.26-.44.5-.67.73-.73.73-1.46 1.21-2.37 1.21-.49 0-.93-.14-1.29-.42-.88-.68-.88-1.93 0-3.48.42-.75.98-1.48 1.6-2.1.85-.85 1.76-1.45 2.67-1.45.49 0 .93.14 1.29.42.42.33.64.79.64 1.34 0 .73-.34 1.48-.88 2.24l-.22.3c.26.3.52.58.79.84.56.54 1.14.93 1.83.93.38 0 .67-.11.88-.34.42-.45.42-1.21 0-2.24-.22-.54-.54-1.09-.93-1.64-.85-1.21-1.98-2.37-3.15-3.15-.64-.42-1.34-.64-2.08-.64-1.21 0-2.37.54-3.37 1.54-1.76 1.76-2.89 4.13-2.89 6.14 0 1.06.3 1.98.88 2.67.64.76 1.54 1.14 2.67 1.14 1.45 0 2.89-.64 4.13-1.76.42-.38.82-.79 1.21-1.21.42.54.88 1.06 1.37 1.54.93.93 1.98 1.45 3.15 1.45 1.06 0 2.08-.34 2.89-1.14.42-.42.64-.93.64-1.54 0-.88-.42-1.76-1.21-2.37z"/>
-                </svg>
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="icon"
-                onClick={() => window.location.href = 'tel:+79023104688'}
-              >
-                <Icon name="Phone" size={20} />
-              </Button>
-            </div>
+          </div>
+          
+          <Separator className="my-8 bg-purple-500/20" />
+          
+          <div className="text-center text-sm text-purple-300/40">
+            <p>© 2024 Kalyan House. Все права защищены.</p>
           </div>
         </div>
       </footer>
