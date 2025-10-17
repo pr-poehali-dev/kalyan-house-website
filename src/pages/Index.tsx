@@ -246,11 +246,47 @@ const Index = () => {
                 ))}
               </div>
             </section>
+
+            <section className="container mx-auto px-4 py-16">
+              <Card className="bg-gradient-to-r from-primary/10 via-purple-500/10 to-primary/10 border-primary/20">
+                <CardContent className="p-8 md:p-12">
+                  <div className="flex flex-col md:flex-row items-center gap-6">
+                    <div className="flex-shrink-0">
+                      <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center">
+                        <Icon name="Gift" size={40} className="text-primary" />
+                      </div>
+                    </div>
+                    <div className="flex-1 text-center md:text-left">
+                      <h3 className="text-2xl md:text-3xl font-bold mb-2">Бонусная программа</h3>
+                      <p className="text-lg text-muted-foreground">
+                        При покупке табака от 1000 рублей — <strong className="text-primary">табак Brusko в подарок!</strong>
+                      </p>
+                    </div>
+                    <Button 
+                      size="lg"
+                      onClick={() => setActiveSection('catalog')}
+                      className="flex-shrink-0"
+                    >
+                      Выбрать табак
+                      <Icon name="ArrowRight" size={20} className="ml-2" />
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
           </>
         )}
 
         {activeSection === 'catalog' && (
           <section className="container mx-auto px-4 py-16">
+            <div className="mb-8 p-4 bg-primary/10 border border-primary/20 rounded-lg">
+              <div className="flex items-center gap-3">
+                <Icon name="Gift" size={24} className="text-primary flex-shrink-0" />
+                <p className="text-sm md:text-base">
+                  <strong>Акция!</strong> Покупка табака от 1000₽ — табак Brusko в подарок
+                </p>
+              </div>
+            </div>
             <h2 className="text-4xl font-bold mb-12">Каталог товаров</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {products.map((product, index) => (
