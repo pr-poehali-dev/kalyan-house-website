@@ -32,13 +32,19 @@ const Index = () => {
 
   const products: Product[] = [
     { id: 1, name: 'Кальян Premium Gold', price: 15900, category: 'Кальяны', image: 'https://images.unsplash.com/photo-1591238371728-70fbfe6c9bf8?w=400' },
-    { id: 2, name: 'Табак Fumari 100г', price: 890, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
-    { id: 3, name: 'Одноразка ELF BAR', price: 550, category: 'Одноразки', image: 'https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=400' },
-    { id: 4, name: 'Уголь кокосовый 1кг', price: 450, category: 'Уголь', image: 'https://images.unsplash.com/photo-1610448721566-47369c768e70?w=400' },
-    { id: 5, name: 'Жидкость Salt 30мл', price: 390, category: 'Жидкости', image: 'https://images.unsplash.com/photo-1608671685857-c8f451c42065?w=400' },
-    { id: 6, name: 'Кальян Portable Mini', price: 4900, category: 'Кальяны', image: 'https://images.unsplash.com/photo-1591238371728-70fbfe6c9bf8?w=400' },
-    { id: 7, name: 'Табак Darkside 250г', price: 1290, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
-    { id: 8, name: 'Одноразка HQD', price: 450, category: 'Одноразки', image: 'https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=400' },
+    { id: 2, name: 'Darkside 250г', price: 1290, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
+    { id: 3, name: 'Brusko 50г', price: 650, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
+    { id: 4, name: 'Daily Hookah 250г', price: 1100, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
+    { id: 5, name: 'Must Have 125г', price: 890, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
+    { id: 6, name: 'Sebero 100г', price: 750, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
+    { id: 7, name: 'Element 100г', price: 790, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
+    { id: 8, name: 'Bonche 80г', price: 680, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
+    { id: 9, name: 'Duft 100г', price: 820, category: 'Табак', image: 'https://images.unsplash.com/photo-1580870069867-74c08b0c5195?w=400' },
+    { id: 10, name: 'Одноразка ELF BAR', price: 550, category: 'Одноразки', image: 'https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=400' },
+    { id: 11, name: 'Уголь кокосовый 1кг', price: 450, category: 'Уголь', image: 'https://images.unsplash.com/photo-1610448721566-47369c768e70?w=400' },
+    { id: 12, name: 'Жидкость Salt 30мл', price: 390, category: 'Жидкости', image: 'https://images.unsplash.com/photo-1608671685857-c8f451c42065?w=400' },
+    { id: 13, name: 'Кальян Portable Mini', price: 4900, category: 'Кальяны', image: 'https://images.unsplash.com/photo-1591238371728-70fbfe6c9bf8?w=400' },
+    { id: 14, name: 'Одноразка HQD', price: 450, category: 'Одноразки', image: 'https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=400' },
   ];
 
   const addToCart = (product: Product) => {
