@@ -329,7 +329,7 @@ const Index = () => {
                     <Icon name="MapPin" size={24} className="text-primary mt-1" />
                     <div>
                       <h4 className="font-semibold mb-2">Адрес</h4>
-                      <p className="text-muted-foreground">г. Москва, ул. Примерная, д. 123</p>
+                      <p className="text-muted-foreground">г. Волгоград, ул. Советская, д. 20</p>
                     </div>
                   </div>
                 </CardContent>
@@ -341,7 +341,7 @@ const Index = () => {
                     <Icon name="Phone" size={24} className="text-primary mt-1" />
                     <div>
                       <h4 className="font-semibold mb-2">Телефон</h4>
-                      <p className="text-muted-foreground">+7 (999) 123-45-67</p>
+                      <p className="text-muted-foreground">+7 (902) 310-46-88</p>
                     </div>
                   </div>
                 </CardContent>
@@ -353,7 +353,7 @@ const Index = () => {
                     <Icon name="Mail" size={24} className="text-primary mt-1" />
                     <div>
                       <h4 className="font-semibold mb-2">Email</h4>
-                      <p className="text-muted-foreground">info@kalyanhouse.ru</p>
+                      <p className="text-muted-foreground">rinatsimashev@yandex.ru</p>
                     </div>
                   </div>
                 </CardContent>
@@ -365,7 +365,7 @@ const Index = () => {
                     <Icon name="Clock" size={24} className="text-primary mt-1" />
                     <div>
                       <h4 className="font-semibold mb-2">Режим работы</h4>
-                      <p className="text-muted-foreground">Ежедневно: 10:00 - 22:00</p>
+                      <p className="text-muted-foreground">Ежедневно: 11:00 - 23:00</p>
                     </div>
                   </div>
                 </CardContent>
